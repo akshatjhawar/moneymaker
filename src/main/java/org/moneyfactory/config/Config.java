@@ -10,30 +10,33 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+import javax.sql.DataSource;
 import java.time.LocalDateTime;
 
 @Log4j2
 @Configuration
 @EnableScheduling
 public class Config {
-//    @Bean
-//    public DataSource dataSource(){
-//        try {
-//            SimpleDriverDataSource ds = new SimpleDriverDataSource();
-//            ds.setDriver(new com.mysql.jdbc.Driver());
-//            ds.setUrl("jdbc:mysql://localhost:3306/toptal");
-//            ds.setUsername("root");
-//            ds.setPassword("");
-//            return ds;
-//        }catch (Exception e){
-//            log.error("error in creating ds ",e.getMessage());
-//        }
-//        return null;
-//    }
-//    public JdbcTemplate jdbcTemplate()  {
-//        return new JdbcTemplate(dataSource());
-//    }
+    @Bean
+    public DataSource dataSource(){
+        try {
+            SimpleDriverDataSource ds = new SimpleDriverDataSource();
+            ds.setDriver(new com.mysql.jdbc.Driver());
+            ds.setUrl("jdbc:mysql://localhost:3306/moneymaker");
+            ds.setUsername("root");
+            ds.setPassword("");
+            return ds;
+        }catch (Exception e){
+            log.error("error in creating ds ",e.getMessage());
+        }
+        return null;
+    }
+    public JdbcTemplate jdbcTemplate()  {
+        return new JdbcTemplate(dataSource());
+    }
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();

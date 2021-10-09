@@ -1,2 +1,4 @@
 nsetools
 flask
+smartapi-python
+websocket-client
